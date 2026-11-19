@@ -1,0 +1,105 @@
+{
+    "version": 1,
+    "name": "inputaction",
+    "maps": [
+        {
+            "name": "player1",
+            "id": "140dfcf8-10f7-4664-a908-a496432333ab",
+            "actions": [
+                {
+                    "name": "move",
+                    "type": "Value",
+                    "id": "3b0befa1-a761-48ba-b60b-c04a98349782",
+                    "expectedControlType": "Axis",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "jump",
+                    "type": "Value",
+                    "id": "9fc8ff49-2d52-4e38-b3af-9ffe439ac1f2",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "fd47d159-5f3d-430d-8bad-d22bf59a4854",
+                    "path": "<Keyboard>/w",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "jump",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "1D Axis",
+                    "id": "a38b1de0-68fd-4401-8ebd-99f505469801",
+                    "path": "1DAxis",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "move",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "negative",
+                    "id": "a7024ffc-db41-46a1-8bcb-70516cd46930",
+                    "path": "<Keyboard>/a",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "positive",
+                    "id": "bcb6093a-b5c3-490e-988a-d3f5dd95ac4b",
+                    "path": "<Keyboard>/d",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                }
+            ]
+        },
+        {
+            "name": "player2",
+            "id": "f752bd64-d193-476d-a96b-d871fc135b35",
+            "actions": [
+                {
+                    "name": "New action",
+                    "type": "Button",
+                    "id": "476ed005-63dc-4ae7-9cf3-ee4ff2cbd361",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "8cd2bee8-3fe7-4360-886d-024d47cdb8f4",
+                    "path": "",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "New action",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}

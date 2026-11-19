@@ -6,11 +6,27 @@ public class player1movement : MonoBehaviour
     public float moveSpeed = 5f;
     public float jumpForce = 7f;
     private Rigidbody2D rb;
-        private bool isGrounded = false;
+    private bool isGrounded = false;
     private float move;
     public BoxCollider2D otherPlayerCollider;
     private BoxCollider2D myCollider;
     private int jumpCount = 0;
+
+    public InputActionReference moveAction;
+    public InputActionReference jumpAction;
+
+    void OnEnable()
+    {
+        moveAction?.action?.Enable();
+        jumpAction?.action?.Enable();
+    }
+
+    void OnDisable()
+    {
+        moveAction?.action?.Disable();
+        jumpAction?.action?.Disable();
+    }
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -21,13 +37,14 @@ public class player1movement : MonoBehaviour
     void Update()
     {
         //walk
-        if (Keyboard.current.aKey.isPressed)
+        float moveInput = moveAction?.action?.ReadValue<float>() ?? 0f;
+
+        if (moveInput < 0f) // A
         {
             transform.position += Vector3.left * moveSpeed * Time.deltaTime;
             move = -1f;
         }
-
-        else if (Keyboard.current.dKey.isPressed)
+        else if (moveInput > 0f) // D
         {
             transform.position += Vector3.right * moveSpeed * Time.deltaTime;
             move = 1f;
@@ -36,13 +53,16 @@ public class player1movement : MonoBehaviour
         {
             move = 0f;
         }
+
         //jump
-        if((isGrounded || IsStandingOnOther())
-            && rb.linearVelocity.y <=0.05f)
+        if ((isGrounded || IsStandingOnOther())
+            && rb.linearVelocity.y <= 0.05f)
         {
             jumpCount = 0;
         }
-        if (Keyboard.current.wKey.wasPressedThisFrame && jumpCount < 2 && !IsOtherOnMyHead())
+
+        if (jumpAction?.action?.WasPressedThisFrame() == true
+            && jumpCount < 2 && !IsOtherOnMyHead())
         {
             rb.linearVelocity = new Vector2(
                 rb.linearVelocity.x, jumpForce
@@ -51,15 +71,16 @@ public class player1movement : MonoBehaviour
             jumpCount++;
             isGrounded = false;
         }
-
     }
+
     void FixedUpdate()
     {
         rb.linearVelocity = new Vector2(move * moveSpeed, rb.linearVelocity.y);
     }
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if(collision.gameObject.CompareTag("Ground"))
+        if (collision.gameObject.CompareTag("Ground"))
         {
             isGrounded = true;
         }
@@ -98,5 +119,4 @@ public class player1movement : MonoBehaviour
         return overlap > 0.05f
             && Mathf.Abs(other.min.y - me.max.y) < 0.15f;
     }
-
 }
